@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: region
+  - name: stg_region
     description: "Geographic regions containing multiple nations"
     columns:
       - name: region_key
@@ -16,7 +16,7 @@ models:
       - name: region_comment
         description: "Additional comments or notes about the region"
 
-  - name: orders
+  - name: stg_orders
     description: "Customer orders containing order details and pricing"
     columns:
       - name: order_key
@@ -29,14 +29,14 @@ models:
         tests:
           - not_null
           - relationships:
-              to: ref('customer')
+              to: ref('stg_customer')
               field: customer_key
       - name: total_price
         description: "Total price of the order including all line items"
         tests:
           - not_null
 
-  - name: nation
+  - name: stg_nation
     description: "Nations/countries grouped by geographic region"
     columns:
       - name: nation_key
@@ -55,10 +55,10 @@ models:
         tests:
           - not_null
           - relationships:
-              to: ref('region')
+              to: ref('stg_region')
               field: region_key
 
-  - name: lineitem
+  - name: stg_lineitem
     description: "Individual line items within customer orders"
     columns:
       - name: order_key
@@ -66,14 +66,14 @@ models:
         tests:
           - not_null
           - relationships:
-              to: ref('orders')
+              to: ref('stg_orders')
               field: order_key
       - name: line_number
         description: "Line number within the order (starts at 1 for each order)"
         tests:
           - not_null
 
-  - name: customer
+  - name: stg_customer
     description: "Customer information and details"
     columns:
       - name: customer_key
@@ -92,6 +92,6 @@ tests:
     description: "Ensure each line number is unique within an order"
     sql: |
       select order_key, line_number, count(*)
-      from {{ ref('lineitem') }}
+      from {{ ref('stg_lineitem') }}
       group by order_key, line_number
       having count(*) > 1

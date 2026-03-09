@@ -231,3 +231,8 @@ airflow/logs/scheduler/latest/*
 *logs*
 airflow/tpch_analytics/metastore_db/*
 spark-warehouse/
+
+
+book/
+
+/metastore_db/

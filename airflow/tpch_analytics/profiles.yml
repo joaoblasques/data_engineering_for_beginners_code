@@ -2,14 +2,9 @@ tpch_analytics:
   target: local
   outputs:
     local:
-        type: spark
-        method: session
-        schema: analytics
-        host: localhost                           # not used, but required by `dbt-core`
+      type: spark
+      method: session
+      schema: prod_db
+      host: localhost
       
-    #   type: spark
-    #   method: thrift
-    #   host: localhost
-    #   port: 10000
-    #   thread: 1
-    #   schema: prod.db
+   

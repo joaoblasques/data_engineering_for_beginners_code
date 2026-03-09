@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: source
     description: Data from application database, brought in by an EL process.
-    schema: analytics
+    schema: prod_db
     tables:
       - name: customer
       - name: nation

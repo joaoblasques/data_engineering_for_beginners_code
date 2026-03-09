@@ -1,0 +1,3 @@
+# dags/.airflowignore
+__pycache__/
+*.pyc
